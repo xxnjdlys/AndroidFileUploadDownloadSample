@@ -28,7 +28,12 @@ import okhttp3.RequestBody;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "MainActivity";
+    private static final String LOG_TAG = "UPLOAD_DOWNLOAD_SAMPLE";
+
+    // fixme: 修改下面上传文件的 url
+    private static final String UPLOAD_URL = "http://xxx.xxx.com/file/upload";
+    // fixme: 修改下面下载文件的 url
+    private static final String DOWNLOAD_URL = "http://xxx.xxx.com/file/download";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,11 +90,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void downloadLogFile(JsonHttpResponseHandler handler) {
-        String url = "http://mini.tiankongbaibian.com/file/download";
         try {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url(url)
+                    .url(DOWNLOAD_URL)
                     .get()
                     .build();
             client.newCall(request).enqueue(handler);
@@ -99,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void uploadLogFileFromAssets(JsonHttpResponseHandler handler) {
-        String url = "http://mini.tiankongbaibian.com/file/upload";
         File file = getFileFromAsset();
         if (file == null) {
             toast("upload file is null.");
@@ -113,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                             RequestBody.create(MediaType.parse("text/plain"), file))
                     .addFormDataPart("other_field", "other_field_value")
                     .build();
-            Request request = new Request.Builder().url(url).post(formBody).build();
+            Request request = new Request.Builder().url(UPLOAD_URL).post(formBody).build();
             client.newCall(request).enqueue(handler);
         } catch (Exception e) {
             printLog(e.getMessage());

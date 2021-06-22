@@ -64,12 +64,12 @@ android {
 
 - 文件上传接口 (POST)
 ```text
-http://mini.tiankongbaibian.com/file/upload
+http://xxx.xxx.com/file/upload
 ```
 
 -文件下载接口 (GET)
 ```text
-http://mini.tiankongbaibian.com/file/download
+http://xxx.xxx.com/file/download
 ```
 
 --------
